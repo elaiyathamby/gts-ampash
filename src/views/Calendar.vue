@@ -30,10 +30,7 @@ export default defineComponent({
           tasks: [
             {
               "date": "2021-06-05",
-              "todos": [
-                  "App",
-                  "Springen"
-              ]
+              "titel": "test"
             },
             {
               "date": "2021-06-05",
@@ -45,6 +42,9 @@ export default defineComponent({
             }
           ]
       }
+  },
+  mounted(){
+    this.tasks = [...new Set(this.tasks.map(x => x.date))].map((k) => ({date:k,todos:this.tasks.filter(x => x.date == k).map(x => x.titel)}) );
   }
 });
 </script>
