@@ -10,7 +10,7 @@
           </ion-tab-button>
 
           <ion-tab-button tab="tasks" href="/tabs/tasks">
-            <ion-icon :icon="ellipse" />
+            <ion-icon :icon="triangle" />
             <ion-label>Tasks</ion-label>
           </ion-tab-button>
         </ion-tab-bar>
