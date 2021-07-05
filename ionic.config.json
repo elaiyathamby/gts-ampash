@@ -1,0 +1,7 @@
+{
+  "name": "gts-pash",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

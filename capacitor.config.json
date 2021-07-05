@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "gts-pash",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
