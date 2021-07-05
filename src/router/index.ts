@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 /*import Home from '../views/Home.vue'
 import Tasks from '../views/Tasks.vue'*/
 import Tabs from '../views/Tabs.vue'
-
+ 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
