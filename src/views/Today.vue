@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Tasks</ion-title>
+        <ion-title>Tasks Heute fällig</ion-title>
       </ion-toolbar>
     </ion-header>
     
@@ -14,11 +14,7 @@
       </ion-header>
     
       <ion-list>
-          <ion-item 
-          button
-          v-bind:router-link="'/tabs/tasks/' + task._id" 
-          v-bind:key="task" 
-          v-for="task in tasks">{{ task }}</ion-item>
+          <ion-item v-bind:key="task" v-for="task in tasks">{{ task }}</ion-item>
       </ion-list>
     </ion-content>
   </ion-page>
@@ -57,7 +53,7 @@ export default defineComponent({
               }
           };
             const answ = await axios.get('https://tasks-0039.restdb.io/rest/tasks',config);
-            //this.tasks = answ.data;
+            this.tasks = answ.data;
       }
   }
 });

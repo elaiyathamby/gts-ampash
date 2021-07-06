@@ -13,6 +13,16 @@
             <ion-icon :icon="triangle" />
             <ion-label>Tasks</ion-label>
           </ion-tab-button>
+
+          <ion-tab-button tab="Kalender" href="/tabs/calendar">
+            <ion-icon :icon="calendar"></ion-icon>
+            <ion-label>Kalender</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="today" href="/tabs/today">
+            <ion-icon :icon="alert" />
+            <ion-label>Tasks Heute</ion-label>
+          </ion-tab-button>
         </ion-tab-bar>
       </ion-tabs>
     </ion-content>
@@ -30,7 +40,7 @@ import {
   IonPage,
   IonRouterOutlet
 } from '@ionic/vue';
-import { ellipse, square, triangle, home } from 'ionicons/icons';
+import { ellipse, square, triangle, home, calendar, alert } from 'ionicons/icons';
 
 export default {
   name: 'Tabs',
@@ -49,7 +59,9 @@ export default {
       ellipse, 
       square, 
       triangle,
-      home
+      home,
+      calendar,
+      alert
     }
   }
 }
