@@ -9,6 +9,29 @@
     </ion-header>
     <ion-content>
         <p>Task-Details for ID {{ id }}</p>
+
+<!-- <ion-input clear-input value="Status"></ion-input>
+
+
+
+          <ion-item>
+          <ion-label>Auswahl Status</ion-label>
+          <ion-select interface="popover">
+            <ion-select-option value="off">Offen</ion-select-option>
+            <ion-select-option value="bea">In Bearbeitung</ion-select-option>
+            <ion-select-option value="don">Done</ion-select-option>
+          </ion-select>
+        </ion-item> 
+        
+        
+  <ion-item>
+    <ion-label position="floating">Reflexion</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+
+        -->
+
+
     </ion-content>
   </ion-page>
 </template>
@@ -27,6 +50,9 @@ export default defineComponent({
     return { id };
   },
 });
+
+
+
 </script>
 
 

@@ -1,45 +1,51 @@
+
+
 <template>
   <!-- Default Input -->
+<h2> Aufgabenerfassung</h2>
+
   <ion-input></ion-input>
 
   <!-- Input with value -->
-  <ion-input value="custom"></ion-input>
 
   <!-- Input with placeholder -->
-  <ion-input placeholder="Enter Input"></ion-input>
+  <ion-item>
+    <ion-label position="floating">Titel</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
 
   <!-- Input with clear button when there is a value -->
-  <ion-input clear-input value="clear me"></ion-input>
-
-  <!-- Number type input -->
-  <ion-input type="number" value="333"></ion-input>
-
-  <!-- Disabled input -->
-  <ion-input value="Disabled" disabled></ion-input>
-
-  <!-- Readonly input -->
-  <ion-input value="Readonly" readonly></ion-input>
-
-  <!-- Inputs with labels -->
-  <ion-item>
-    <ion-label>Default Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Floating Label</ion-label>
-    <ion-input></ion-input>
+    <ion-label position="floating">Beschreibung</ion-label>
+    <ion-textarea></ion-textarea>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="fixed">Fixed Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Stacked Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
+
+          <ion-item>
+          <ion-label>Kategorie</ion-label>
+          <ion-select interface="popover">
+            <ion-select-option value="pri">Privat</ion-select-option>
+            <ion-select-option value="biz">Business</ion-select-option>
+            <ion-select-option value="oth">Others</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+<ion-item>
+  <ion-label>Fälligkeitsdatum </ion-label>
+  <ion-datetime display-format="D MMM YYYY" min="2021" max="2040" value="2005-06-17"></ion-datetime>
+</ion-item>
+
+
+ <ion-button expand="block">Speichern</ion-button>
+
+
+
+
+<!-- speichern
+-->
+
 </template>
 
 <script>
@@ -48,5 +54,8 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   components: { IonLabel, IonInput, IonItem }
+
+
+  
 });
 </script>

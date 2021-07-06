@@ -14,7 +14,7 @@
       </ion-header>
     
       <div id="container">
-        <ion-button router-link="/tabs/tasks">Show Tasks</ion-button>
+        <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
       </div>
     </ion-content>
   </ion-page>
