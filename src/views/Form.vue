@@ -11,13 +11,14 @@
   <!-- Input with placeholder -->
   <ion-item>
     <ion-label position="floating">Titel</ion-label>
-    <ion-input></ion-input>
+    <ion-input v-model="title"></ion-input>
   </ion-item>
 
   <!-- Input with clear button when there is a value -->
 
   <ion-item>
     <ion-label position="floating">Beschreibung</ion-label>
+    <ion-input v-model="beschreibung"></ion-input>
     <ion-textarea></ion-textarea>
   </ion-item>
 
@@ -25,20 +26,25 @@
 
           <ion-item>
           <ion-label>Kategorie</ion-label>
-          <ion-select interface="popover">
-            <ion-select-option value="pri">Privat</ion-select-option>
-            <ion-select-option value="biz">Business</ion-select-option>
-            <ion-select-option value="oth">Others</ion-select-option>
+          <ion-select v-model="category" interface="popover">
+            <ion-select-option :key="cat" v-for="cat in categories" v-bind:value="cat">{{ cat }}</ion-select-option>
           </ion-select>
         </ion-item>
 
+
+
+
 <ion-item>
+  
   <ion-label>Fälligkeitsdatum </ion-label>
-  <ion-datetime display-format="D MMM YYYY" min="2021" max="2040" value="2005-06-17"></ion-datetime>
+  <ion-datetime v-model="datum" display-format="D MMM YYYY" min="2021" max="2030" value="2021-07-11"></ion-datetime>
+  <ion-select-option  v-bind="datum"></ion-select-option>
 </ion-item>
 
 
- <ion-button expand="block">Speichern</ion-button>
+ <ion-button @click="save" expand="block">Speichern</ion-button>
+
+
 
 
 
@@ -49,11 +55,25 @@
 </template>
 
 <script>
-import { IonLabel, IonInput, IonItem } from '@ionic/vue';
+import { IonLabel, IonInput, IonItem, IonDatetime } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  components: { IonLabel, IonInput, IonItem }
+  components: { IonLabel, IonInput, IonItem, IonDatetime },
+  data(){
+    return {
+      title: "",
+      beschreibung: "",
+      categories: ["PRIVATE","BUSINESS","OTHERS"],
+      category: "",
+      datum: "",
+    }
+  },
+  methods:{
+    save(){
+      //alert(this.datum.split('T')[0]);
+    }
+  }
 
 
   

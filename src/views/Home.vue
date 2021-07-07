@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>Getting Things Done</ion-title>
       </ion-toolbar>
     </ion-header>
     
@@ -16,6 +16,10 @@
       <div id="container">
         <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
       </div>
+
+        <p>Lat: {{ latitude }}</p>
+        <p>Long: {{ longitude }}</p>
+
     </ion-content>
   </ion-page>
 </template>
@@ -23,6 +27,7 @@
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import { Geolocation } from "@capacitor/geolocation";
 
 export default defineComponent({
   name: 'Home',
@@ -33,8 +38,25 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonButton
-  }
+  },
+  data() {
+    return {
+      latitude: 0,
+      longitude: 0,
+      first: "",
+    };
+  },
+  async mounted() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log(coordinates);
+    this.latitude = coordinates.coords.latitude;
+    this.longitude = coordinates.coords.longitude;
+    }
 });
+
+
+ 
+
 </script>
 
 <style scoped>

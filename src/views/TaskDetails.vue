@@ -32,6 +32,21 @@
         -->
 
 
+  <ion-item>
+    <ion-label position="floating">Reflexion</ion-label>
+    <ion-input v-model="Reflexion"></ion-input>
+  </ion-item>
+
+
+          <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-select v-model="status" interface="popover">
+            <ion-select-option :key="sta" v-for="sta in statuss" v-bind:value="sta">{{ sta }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+<ion-button @click="save" expand="block">Speichern</ion-button>
+
     </ion-content>
   </ion-page>
 </template>
@@ -49,6 +64,13 @@ export default defineComponent({
 
     return { id };
   },
+    data(){
+    return {
+      reflexion: "",
+      statuss: ["Offen","In Bearbeitung","Erledigt"],
+      status: ""
+
+    }}
 });
 
 

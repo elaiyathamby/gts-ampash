@@ -12,10 +12,17 @@
           <ion-title size="large">Tasks</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <ion-list>
+
+
+
+
+    <ion-list>
           <ion-item v-bind:key="task" v-for="task in tasks">{{ task }}</ion-item>
       </ion-list>
+      
+
+
+
     </ion-content>
   </ion-page>
 </template>
@@ -38,9 +45,23 @@ export default defineComponent({
   },
   data(){
       return{
-          tasks: []
+          tasks: [{
+          date: "2021-06-05",
+          titel: "test",
+        },
+        {
+          date: "2021-06-05",
+          titel: "App",
+        },
+        {
+          date: "2021-06-08",
+          titel: "Springen",
+        },]
       }
   },
+
+
+
   mounted(){
       this.getTasks();
   },
@@ -57,4 +78,6 @@ export default defineComponent({
       }
   }
 });
+
+
 </script>
