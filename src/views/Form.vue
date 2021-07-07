@@ -1,52 +1,81 @@
+
+
 <template>
   <!-- Default Input -->
+<h2> Aufgabenerfassung</h2>
+
   <ion-input></ion-input>
 
   <!-- Input with value -->
-  <ion-input value="custom"></ion-input>
 
   <!-- Input with placeholder -->
-  <ion-input placeholder="Enter Input"></ion-input>
+  <ion-item>
+    <ion-label position="floating">Titel</ion-label>
+    <ion-input v-model="title"></ion-input>
+  </ion-item>
 
   <!-- Input with clear button when there is a value -->
-  <ion-input clear-input value="clear me"></ion-input>
-
-  <!-- Number type input -->
-  <ion-input type="number" value="333"></ion-input>
-
-  <!-- Disabled input -->
-  <ion-input value="Disabled" disabled></ion-input>
-
-  <!-- Readonly input -->
-  <ion-input value="Readonly" readonly></ion-input>
-
-  <!-- Inputs with labels -->
-  <ion-item>
-    <ion-label>Default Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Floating Label</ion-label>
-    <ion-input></ion-input>
+    <ion-label position="floating">Beschreibung</ion-label>
+    <ion-input v-model="beschreibung"></ion-input>
+    <ion-textarea></ion-textarea>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="fixed">Fixed Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Stacked Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
+
+          <ion-item>
+          <ion-label>Kategorie</ion-label>
+          <ion-select v-model="category" interface="popover">
+            <ion-select-option :key="cat" v-for="cat in categories" v-bind:value="cat">{{ cat }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+
+
+<ion-item>
+  
+  <ion-label>Fälligkeitsdatum </ion-label>
+  <ion-datetime v-model="datum" display-format="D MMM YYYY" min="2021" max="2030" value="2021-07-11"></ion-datetime>
+  <ion-select-option  v-bind="datum"></ion-select-option>
+</ion-item>
+
+
+ <ion-button @click="save" expand="block">Speichern</ion-button>
+
+
+
+
+
+
+<!-- speichern
+-->
+
 </template>
 
 <script>
-import { IonLabel, IonInput, IonItem } from '@ionic/vue';
+import { IonLabel, IonInput, IonItem, IonDatetime } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  components: { IonLabel, IonInput, IonItem }
+  components: { IonLabel, IonInput, IonItem, IonDatetime },
+  data(){
+    return {
+      title: "",
+      beschreibung: "",
+      categories: ["PRIVATE","BUSINESS","OTHERS"],
+      category: "",
+      datum: "",
+    }
+  },
+  methods:{
+    save(){
+      //alert(this.datum.split('T')[0]);
+    }
+  }
+
+
+  
 });
 </script>
