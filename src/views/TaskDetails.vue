@@ -10,26 +10,28 @@
     <ion-content>
         <p>Task-Details for ID {{ id }}</p>
 
-<!-- <ion-input clear-input value="Status"></ion-input>
-
-
-
-          <ion-item>
-          <ion-label>Auswahl Status</ion-label>
-          <ion-select interface="popover">
-            <ion-select-option value="off">Offen</ion-select-option>
-            <ion-select-option value="bea">In Bearbeitung</ion-select-option>
-            <ion-select-option value="don">Done</ion-select-option>
-          </ion-select>
-        </ion-item> 
-        
-        
   <ion-item>
-    <ion-label position="floating">Reflexion</ion-label>
-    <ion-textarea></ion-textarea>
+    <ion-label>Titel</ion-label>
   </ion-item>
 
-        -->
+  <ion-item>
+    <ion-label >Beschreibung</ion-label>
+
+  </ion-item>
+
+
+
+  <ion-item>
+  <ion-label>Kategorie</ion-label>
+  </ion-item>
+
+
+
+<ion-item>
+  
+  <ion-label>Fälligkeitsdatum </ion-label>
+ 
+</ion-item>
 
 
   <ion-item>
@@ -45,7 +47,20 @@
           </ion-select>
         </ion-item>
 
+
+
 <ion-button @click="save" expand="block">Speichern</ion-button>
+
+
+<p>Fotogalerie</p>
+
+<ion-content :fullscreen="true">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button @click="takePhoto()">
+      <ion-icon :icon="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
 
     </ion-content>
   </ion-page>
@@ -53,16 +68,22 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { IonPage, IonHeader, IonToolbar, IonBackButton, IonContent, IonButtons } from "@ionic/vue";
+import { IonPage, IonHeader, IonToolbar, IonBackButton, IonContent, IonButtons, IonFab, IonFabButton, IonIcon
+        } from "@ionic/vue";
+        import { camera, trash, close } from 'ionicons/icons';
 import { useRoute } from "vue-router";
+import { usePhotoGallery } from '@/composables/usePhotoGallery';
+
 
 export default defineComponent({
-  components: { IonPage, IonHeader, IonToolbar, IonBackButton, IonContent, IonButtons },
+  components: { IonPage, IonHeader, IonToolbar, IonBackButton, IonContent, IonButtons, IonFab, IonFabButton,
+        IonIcon },
   setup() {
     const route = useRoute();
     const { id } = route.params;
+    const { takePhoto } = usePhotoGallery();
+    return { id, takePhoto, camera, trash, close };
 
-    return { id };
   },
     data(){
     return {
