@@ -119,8 +119,8 @@ export default defineComponent({
     return {
       latitude: 0,
       longitude: 0,
-      statuss: ["OPEN", "INPROGRESS", "DONE"],
-      categories: ["PRIVATE", "BUSINESS", "OTHERS"],
+      statuss: ["OPEN", "INPROGRESS", "DONE", ""],
+      categories: ["PRIVATE", "BUSINESS", "OTHERS", ""],
       status: "",
       category: "",
       title: ""
