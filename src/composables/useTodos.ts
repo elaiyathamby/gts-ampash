@@ -1,6 +1,7 @@
 import { getAllToDos, updateToDoApi, addNewToDo, getTodayToDos, getFilterToDos ,getToDoById} from '@/api/todos';
 import { ToDo } from '@/model/todo';
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export function useTodos() {
 
@@ -11,6 +12,7 @@ export function useTodos() {
     const newTodo = ref<ToDo>({});
 
     const orderedTodo = ref<any>({});
+    const router = useRouter();
 
     const getTodos = async () => {
         try {
@@ -52,7 +54,9 @@ export function useTodos() {
         try {
             // add the new todo and update the list of all todos afterwards
             await addNewToDo(newTodo.value);
+            alert("Gespeichert!")
             getTodos();
+            router.push('/tabs/calendar');
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -62,6 +66,9 @@ export function useTodos() {
         try {
             // add the new todo and update the list of all todos afterwards
             await updateToDoApi(todo.value);
+            alert("Gespeichert!");
+            getTodos();
+            router.push('/tabs/calendar');
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }

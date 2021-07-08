@@ -4,11 +4,6 @@
       <ion-tabs>
         <ion-router-outlet></ion-router-outlet>
         <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="home" href="/tabs/home">
-            <ion-icon :icon="home" />
-            <ion-label>Home</ion-label>
-          </ion-tab-button>
-
           <ion-tab-button tab="Kalender" href="/tabs/calendar">
             <ion-icon :icon="calendar"></ion-icon>
             <ion-label>Kalender</ion-label>
@@ -41,7 +36,7 @@ import {
   IonPage,
   IonRouterOutlet
 } from '@ionic/vue';
-import { ellipse, square, triangle, home, calendar, alert, add } from 'ionicons/icons';
+import { ellipse, square, triangle, calendar, alert, add } from 'ionicons/icons';
 
 export default {
   name: 'Tabs',
@@ -60,7 +55,6 @@ export default {
       ellipse, 
       square, 
       triangle,
-      home,
       calendar,
       alert,
       add

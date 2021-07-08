@@ -18,15 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: 'home'
-      },
-      {
-        path: 'home',
-        component: () => import('@/views/Home.vue')
-      },
-      {
-        path: 'tasks',
-        component: () => import('@/views/Tasks.vue')
+        redirect: '/calendar'
       },
       {
         path: 'today',
