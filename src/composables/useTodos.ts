@@ -8,9 +8,12 @@ export function useTodos() {
 
     const newTodo = ref<ToDo>({});
 
+    const orderedTodo = ref<any>({});
+
     const getTodos = async () => {
         try {
             todos.value = await getAllToDos();
+            orderedTodo.value = [...new Set(todos.value.map((x) => x.due))].map((k) => ({ date: k, todos: todos.value.filter((x) => x.due == k).map((x) => x),}));
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -19,6 +22,14 @@ export function useTodos() {
     const getTodayTodos = async () => {
         try {
             todos.value = await getTodayToDos();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
+
+    const getFilterTodos = async (filter: string) => {
+        try {
+            todos.value = await getFilterToDos(filter);
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -42,6 +53,7 @@ export function useTodos() {
         newTodo,
         todos,
         getTodos,
-        addTodo
+        addTodo,
+        orderedTodo
     }
 }
