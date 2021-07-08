@@ -14,6 +14,18 @@ export async function getAllToDos(): Promise<ToDo[]>   {
     }
 }
 
+export async function getToDoById(id: string): Promise<ToDo>   { 
+    const config = {        
+        withCredentials: true
+    }
+    try {
+        const response = await axios.get(API_ROOT + '/api/todo/single?id='+id, config);
+        return response.data;
+    } catch (error) {
+        return error;   
+    }
+}
+
 export async function getFilterToDos(query: string): Promise<ToDo[]>   { 
     const config = {        
         withCredentials: true
@@ -50,7 +62,7 @@ export async function addNewToDo(newToDo: ToDo): Promise<any>   {
     }
 }
 
-export async function updateToDo(toDo: ToDo): Promise<any>   {
+export async function updateToDoApi(toDo: ToDo): Promise<any>   {
     const config = {        
         withCredentials: true
     }

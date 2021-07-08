@@ -32,7 +32,7 @@ export default defineComponent({
     IonLabel,
   },
   props:{
-    tasks: Array
+    tasks: Object
   } 
 });
 </script>

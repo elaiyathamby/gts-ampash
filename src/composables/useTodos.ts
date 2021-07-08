@@ -1,10 +1,12 @@
-import { getAllToDos, updateToDo, addNewToDo, getTodayToDos, getFilterToDos } from '@/api/todos';
+import { getAllToDos, updateToDoApi, addNewToDo, getTodayToDos, getFilterToDos ,getToDoById} from '@/api/todos';
 import { ToDo } from '@/model/todo';
 import { onMounted, ref } from 'vue';
 
 export function useTodos() {
 
     const todos = ref<ToDo[]>([]);
+
+    const todo = ref<ToDo>({});
 
     const newTodo = ref<ToDo>({});
 
@@ -19,9 +21,18 @@ export function useTodos() {
         }
     }
 
+    const getTodoById = async (id: string) => {
+        try {
+            todo.value = await getToDoById(id);
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
+
     const getTodayTodos = async () => {
         try {
             todos.value = await getTodayToDos();
+            orderedTodo.value = [...new Set(todos.value.map((x) => x.due))].map((k) => ({ date: k, todos: todos.value.filter((x) => x.due == k).map((x) => x),}));
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -30,6 +41,7 @@ export function useTodos() {
     const getFilterTodos = async (filter: string) => {
         try {
             todos.value = await getFilterToDos(filter);
+            orderedTodo.value = [...new Set(todos.value.map((x) => x.due))].map((k) => ({ date: k, todos: todos.value.filter((x) => x.due == k).map((x) => x),}));
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -39,9 +51,17 @@ export function useTodos() {
     const addTodo = async () => {
         try {
             // add the new todo and update the list of all todos afterwards
-            console.log(newTodo.value.description);
             await addNewToDo(newTodo.value);
             getTodos();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+    }
+
+    const updateTodo = async () => {
+        try {
+            // add the new todo and update the list of all todos afterwards
+            await updateToDoApi(todo.value);
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
@@ -52,8 +72,13 @@ export function useTodos() {
     return {
         newTodo,
         todos,
+        orderedTodo,
+        todo,
         getTodos,
         addTodo,
-        orderedTodo
+        getTodoById,
+        getTodayTodos,
+        getFilterTodos,
+        updateTodo
     }
 }
