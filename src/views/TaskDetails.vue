@@ -62,7 +62,11 @@
       <ion-button @click="save" expand="block">Speichern</ion-button>
     </ion-content>
     <ion-content>
-      <p>Fotogalerie</p>
+      <ion-grid>
+      <ion-row>
+<ion-col>Fotogalerie</ion-col>
+</ion-row>
+</ion-grid>
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-fab-button @click="takePhoto()">
           <ion-icon :icon="camera"></ion-icon>

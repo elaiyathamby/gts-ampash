@@ -24,11 +24,19 @@
 <ion-col>Long: {{ longitude }}</ion-col>
 </ion-row>
 
-<ion-row>
-<ion-col>Fotogalerie</ion-col>
-</ion-row>
-
 <ion-button @click="save" expand="block">Speichern</ion-button>
+
+<ion-searchbar show-cancel-button="never"></ion-searchbar>
+<!-- <script>
+import { IonSearchbar, IonToolbar } from '@ionic/vue';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  components: { IonSearchbar, IonToolbar }
+});
+</script>   -->
+
+
 
 </ion-grid>
     </ion-content>
