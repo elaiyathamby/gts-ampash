@@ -17,9 +17,20 @@
         <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
       </div>
 
-        <p>Lat: {{ latitude }}</p>
-        <p>Long: {{ longitude }}</p>
+<ion-grid>
+<ion-row>
+<ion-col>Deine Koordinaten</ion-col>
+<ion-col>Lat: {{ latitude }}</ion-col>
+<ion-col>Long: {{ longitude }}</ion-col>
+</ion-row>
 
+<ion-row>
+<ion-col>Fotogalerie</ion-col>
+</ion-row>
+
+<ion-button @click="save" expand="block">Speichern</ion-button>
+
+</ion-grid>
     </ion-content>
   </ion-page>
 </template>
