@@ -6,11 +6,11 @@
 
     <ion-item
       button
-      v-bind:router-link="'/tabs/calendar/' + todo"
+      v-bind:router-link="'/tabs/calendar/' + todo.id"
       v-bind:key="todo"
       v-for="todo in task.todos"
     >
-      <ion-label>{{ todo }}</ion-label>
+      <ion-label>{{ todo.title }}</ion-label>
     </ion-item>
   </ion-item-group>
 </template>

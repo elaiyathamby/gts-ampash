@@ -12,63 +12,49 @@
       <div id="container">
         <ion-button v-bind:router-link="'/tabs/form'">Neue Aufgabe</ion-button>
       </div>
-
       <h4>Deine Koordinaten</h4>
       <p>Lat: {{ latitude }}</p>
       <p>Long: {{ longitude }}</p>
-
-      <todos v-bind:tasks="tasks"></todos>
+      <todos v-bind:tasks="orderedTodo"></todos>
     </ion-content>
   </ion-page>
 </template>
 <script>
-import {
-  IonPage,
-  IonContent,
-  IonButton,
-} from "@ionic/vue";
+import { useTodos } from "@/composables/useTodos"
 import { defineComponent } from "vue";
 import { Geolocation } from "@capacitor/geolocation";
 import Todos from "@/components/ToDos.vue";
+import { IonPage ,IonContent, IonButton,IonHeader,IonToolbar,IonBackButton , IonButtons , IonTitle} from "@ionic/vue";
 
 export default defineComponent({
   components: {
     IonPage,
     IonContent,
     IonButton,
-    Todos
+    IonHeader,
+    Todos,
+    IonToolbar,
+    IonBackButton,
+    IonButtons,
+    IonTitle,
   },
   data() {
     return {
-      tasks: [
-        {
-          date: "2021-06-05",
-          titel: "test",
-        },
-        {
-          date: "2021-06-05",
-          titel: "App",
-        },
-        {
-          date: "2021-06-08",
-          titel: "Springen",
-        },
-      ],
-
+      tasks: [],
       latitude: 0,
-      longitude: 0,
-      first: "",
+      longitude: 0
     };
   },
   async mounted() {
-    this.tasks = [...new Set(this.tasks.map((x) => x.date))].map((k) => ({
-      date: k,
-      todos: this.tasks.filter((x) => x.date == k).map((x) => x.titel),
-    }));
     const coordinates = await Geolocation.getCurrentPosition();
-    console.log(coordinates);
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
+
+    
+  },
+  setup() {
+    const { orderedTodo } = useTodos();
+    return { orderedTodo };
   },
 });
 </script>
