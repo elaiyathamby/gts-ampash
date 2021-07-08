@@ -5,7 +5,7 @@
         <ion-title>Tasks Heute fällig</ion-title>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -17,20 +17,24 @@
 
 
     <ion-list>
-          <ion-item v-bind:key="task" v-for="task in tasks">{{ task }}</ion-item>
+       <todos v-bind:tasks="tasks"></todos>
+        <!-- <ion-item v-bind:key="task" v-for="task in tasks">{{ task }}</ion-item>  -->
+
       </ion-list>
-      
+
+     
 
 
 
     </ion-content>
   </ion-page>
 </template>
- 
+
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from 'axios';
+import Todos from "@/components/ToDos.vue";
 
 export default defineComponent({
   name: 'Home',
@@ -41,7 +45,7 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonList,
-    IonItem
+    Todos
   },
   data(){
       return{

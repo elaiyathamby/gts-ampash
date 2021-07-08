@@ -10,52 +10,33 @@
     </ion-header>
     <ion-content>
       <div id="container">
-        <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
+        <ion-button v-bind:router-link="'/tabs/form'">Neue Aufgabe</ion-button>
       </div>
 
       <h4>Deine Koordinaten</h4>
       <p>Lat: {{ latitude }}</p>
       <p>Long: {{ longitude }}</p>
 
-      <ion-item-group v-bind:key="task" v-for="task in tasks">
-        <ion-item-divider>
-          <ion-label>{{ task.date }}</ion-label>
-        </ion-item-divider>
-
-        <ion-item
-          button
-          v-bind:router-link="'/tabs/calendar/' + todo"
-          v-bind:key="todo"
-          v-for="todo in task.todos"
-        >
-          <ion-label>{{ todo }}</ion-label>
-        </ion-item>
-      </ion-item-group>
+      <todos v-bind:tasks="tasks"></todos>
     </ion-content>
   </ion-page>
 </template>
 <script>
 import {
-  IonItem,
-  IonItemDivider,
-  IonItemGroup,
-  IonLabel,
   IonPage,
   IonContent,
   IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { Geolocation } from "@capacitor/geolocation";
+import Todos from "@/components/ToDos.vue";
 
 export default defineComponent({
   components: {
-    IonItem,
-    IonItemDivider,
-    IonItemGroup,
-    IonLabel,
     IonPage,
     IonContent,
     IonButton,
+    Todos
   },
   data() {
     return {
