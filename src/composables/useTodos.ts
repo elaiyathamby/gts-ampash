@@ -28,6 +28,7 @@ export function useTodos() {
     const addTodo = async () => {
         try {
             // add the new todo and update the list of all todos afterwards
+            console.log(newTodo.value.description);
             await addNewToDo(newTodo.value);
             getTodos();
         } catch (error) {

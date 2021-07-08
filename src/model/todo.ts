@@ -5,6 +5,6 @@ export interface ToDo {
     open?: string;
     due?: string;
     reflexion?: string;
-    status?: string;
+    status?: string; 
     category?: string;
 }
