@@ -2,86 +2,44 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Tasks Heute fällig</ion-title>
+        <ion-title>Tasks bis <i style="color:red">Heute</i> fällig</ion-title>
       </ion-toolbar>
     </ion-header>
-
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tasks</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-
-
-
-    <ion-list>
-       <todos v-bind:tasks="tasks"></todos>
-        <!-- <ion-item v-bind:key="task" v-for="task in tasks">{{ task }}</ion-item>  -->
-
-      </ion-list>
-
-     
-
-
-
+      <todos v-bind:tasks="orderedTodo"></todos>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem } from '@ionic/vue';
-import { defineComponent } from 'vue';
-import axios from 'axios';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonList,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import Todos from "@/components/ToDos.vue";
+import { useTodos } from "@/composables/useTodos";
 
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {
     IonContent,
     IonHeader,
     IonPage,
     IonTitle,
     IonToolbar,
-    IonList,
-    Todos
+    Todos,
   },
-  data(){
-      return{
-          tasks: [{
-          date: "2021-06-05",
-          titel: "test",
-        },
-        {
-          date: "2021-06-05",
-          titel: "App",
-        },
-        {
-          date: "2021-06-08",
-          titel: "Springen",
-        },]
-      }
+  setup() {
+    const { orderedTodo, getTodayTodos } = useTodos();
+    return { orderedTodo, getTodayTodos };
   },
-
-
-
-  mounted(){
-      this.getTasks();
+  mounted() {
+    this.getTodayTodos();
   },
-  methods: {
-      async getTasks(){
-          const config = {
-              headers: {
-                  'Content-Type': 'application/json',
-                  'x-apikey': '5b2e750b0c346a20d90a5dda'
-              }
-          };
-            const answ = await axios.get('https://tasks-0039.restdb.io/rest/tasks',config);
-            this.tasks = answ.data;
-      }
-  }
 });
-
-
 </script>

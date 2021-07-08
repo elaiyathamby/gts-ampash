@@ -14,15 +14,58 @@
           >Neue Aufgabe</ion-button
         >
       </div>
-
       <ion-grid>
         <ion-row>
           <ion-col>Deine Koordinaten</ion-col>
           <ion-col>Lat: {{ latitude }}</ion-col>
           <ion-col>Long: {{ longitude }}</ion-col>
         </ion-row>
-
-        <ion-searchbar show-cancel-button="never"></ion-searchbar>
+        <ion-row>
+          <ion-col>
+            <ion-searchbar v-model="title" show-cancel-button="never"></ion-searchbar>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Status</ion-label>
+              <ion-select
+                v-model="status"
+                interface="popover"
+              >
+                <ion-select-option
+                  :key="sta"
+                  v-for="sta in statuss"
+                  v-bind:value="sta"
+                  >{{ sta }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Kategorie</ion-label>
+              <ion-select
+                v-model="category"
+                interface="popover"
+              >
+                <ion-select-option
+                  :key="cat"
+                  v-for="cat in categories"
+                  v-bind:value="cat"
+                  >{{ cat }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+          <div id="container">
+            <ion-button v-on:click="filter" expand="block">
+              Filtern
+            </ion-button>
+          </div>
+          </ion-col>
+        </ion-row>
       </ion-grid>
       <todos v-bind:tasks="orderedTodo"></todos>
     </ion-content>
@@ -45,7 +88,11 @@ import {
   IonRow,
   IonCol,
   IonGrid,
-  IonSearchbar
+  IonSearchbar,
+  IonLabel,
+  IonSelectOption,
+  IonSelect,
+  IonItem,
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -62,12 +109,21 @@ export default defineComponent({
     IonRow,
     IonCol,
     IonGrid,
-    IonSearchbar
+    IonSearchbar,
+    IonLabel,
+    IonSelectOption,
+    IonItem,
+    IonSelect,
   },
   data() {
     return {
       latitude: 0,
       longitude: 0,
+      statuss: ["OPEN", "INPROGRESS", "DONE"],
+      categories: ["PRIVATE", "BUSINESS", "OTHERS"],
+      status: "",
+      category: "",
+      title: ""
     };
   },
   async mounted() {
@@ -76,9 +132,18 @@ export default defineComponent({
     this.longitude = coordinates.coords.longitude;
   },
   setup() {
-    const { orderedTodo } = useTodos();
-    return { orderedTodo };
+    const { orderedTodo, getTodos, getFilterTodos } = useTodos();
+    return { orderedTodo, getTodos, getFilterTodos };
   },
+  methods: {
+    filter() {
+      let filterstring = "";
+      if(this.title != "") filterstring += "title="+this.title+"&";
+      if(this.status != "") filterstring += "status="+this.status+"&";
+      if(this.category != "") filterstring += "category="+this.category;
+      this.getFilterTodos(filterstring);
+    }
+  }
 });
 </script>
 

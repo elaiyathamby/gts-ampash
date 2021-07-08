@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Task-Details for ID {{ id }}</ion-title>
+        <ion-title>Task-Details for {{ todo.title }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -49,7 +49,7 @@
 
       <ion-item>
         <ion-label>Status</ion-label>
-        <ion-select v-bind:value="todo.status" interface="popover">
+        <ion-select v-model="todo.status" interface="popover">
           <ion-select-option
             :key="sta"
             v-for="sta in statuss"
@@ -58,7 +58,7 @@
           >
         </ion-select>
       </ion-item>
-      <ion-button expand="block">Speichern</ion-button>
+      <ion-button @click="updateTodo" expand="block">Speichern</ion-button>
     </ion-content>
     <ion-content>
       <ion-grid>
@@ -142,18 +142,16 @@ export default defineComponent({
     const route = useRoute();
     const { id } = route.params;
     const { photos, takePhoto } = usePhotoGallery();
-    const { todo, getTodoById } = useTodos();
-    return { id, takePhoto, camera, trash, close, photos, todo, getTodoById };
+    const { todo, getTodoById, updateTodo } = useTodos();
+    return { id, takePhoto, camera, trash, close, photos, todo, getTodoById ,updateTodo};
   },
   mounted() {
     this.getTodoById(this.id as any);
   },
   data() {
     return {
-      reflexion: "",
       statuss: ["OPEN", "INPROGRESS", "DONE"],
-      categories: ["PRIVATE", "BUSINESS", "OTHERS"],
-      status: "",
+      categories: ["PRIVATE", "BUSINESS", "OTHERS"]
     };
   },
 });
