@@ -33,6 +33,6 @@ export default defineComponent({
   },
   props:{
     tasks: Array
-  }
+  } 
 });
 </script>
