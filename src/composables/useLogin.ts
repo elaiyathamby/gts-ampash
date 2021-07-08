@@ -12,8 +12,13 @@ export function useLogin() {
         try {
             const token = await getToken(username.value, password.value);
             // TODO: do something meaningful with the token :-)
-            //console.log(token)
-            router.push('/tabs/todo')
+            console.log(token);
+            if(token){
+                router.push('/tabs/calendar');
+            } else{
+                alert("Falsches Passwort");
+                router.push('/login');
+            }
         } catch (error) {
             console.log(error)
         }
