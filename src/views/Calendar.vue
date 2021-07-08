@@ -10,21 +10,43 @@
     </ion-header>
     <ion-content>
       <div id="container">
-        <ion-button v-bind:router-link="'/tabs/form'">Neue Aufgabe</ion-button>
+        <ion-button v-bind:router-link="'/tabs/form'" expand="block"
+          >Neue Aufgabe</ion-button
+        >
       </div>
-      <h4>Deine Koordinaten</h4>
-      <p>Lat: {{ latitude }}</p>
-      <p>Long: {{ longitude }}</p>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>Deine Koordinaten</ion-col>
+          <ion-col>Lat: {{ latitude }}</ion-col>
+          <ion-col>Long: {{ longitude }}</ion-col>
+        </ion-row>
+
+        <ion-searchbar show-cancel-button="never"></ion-searchbar>
+      </ion-grid>
       <todos v-bind:tasks="orderedTodo"></todos>
     </ion-content>
   </ion-page>
 </template>
 <script>
-import { useTodos } from "@/composables/useTodos"
+import { useTodos } from "@/composables/useTodos";
 import { defineComponent } from "vue";
 import { Geolocation } from "@capacitor/geolocation";
 import Todos from "@/components/ToDos.vue";
-import { IonPage ,IonContent, IonButton,IonHeader,IonToolbar,IonBackButton , IonButtons , IonTitle} from "@ionic/vue";
+import {
+  IonPage,
+  IonContent,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonBackButton,
+  IonButtons,
+  IonTitle,
+  IonRow,
+  IonCol,
+  IonGrid,
+  IonSearchbar
+} from "@ionic/vue";
 
 export default defineComponent({
   components: {
@@ -37,20 +59,21 @@ export default defineComponent({
     IonBackButton,
     IonButtons,
     IonTitle,
+    IonRow,
+    IonCol,
+    IonGrid,
+    IonSearchbar
   },
   data() {
     return {
-      tasks: [],
       latitude: 0,
-      longitude: 0
+      longitude: 0,
     };
   },
   async mounted() {
     const coordinates = await Geolocation.getCurrentPosition();
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
-
-    
   },
   setup() {
     const { orderedTodo } = useTodos();

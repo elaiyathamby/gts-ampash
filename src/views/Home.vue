@@ -5,58 +5,54 @@
         <ion-title>Getting Things Done</ion-title>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Blank</ion-title>
         </ion-toolbar>
       </ion-header>
-    
+
       <div id="container">
         <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
       </div>
 
-<ion-grid>
-<ion-row>
-<ion-col>Deine Koordinaten</ion-col>
-<ion-col>Lat: {{ latitude }}</ion-col>
-<ion-col>Long: {{ longitude }}</ion-col>
-</ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Deine Koordinaten</ion-col>
+          <ion-col>Lat: {{ latitude }}</ion-col>
+          <ion-col>Long: {{ longitude }}</ion-col>
+        </ion-row>
 
-<ion-button @click="save" expand="block">Speichern</ion-button>
+        <ion-button @click="save" expand="block">Speichern</ion-button>
 
-<ion-searchbar show-cancel-button="never"></ion-searchbar>
-<!-- <script>
-import { IonSearchbar, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  components: { IonSearchbar, IonToolbar }
-});
-</script>   -->
-
-
-
-</ion-grid>
+        <ion-searchbar show-cancel-button="never"></ion-searchbar>
+      </ion-grid>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import { Geolocation } from "@capacitor/geolocation";
 
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {
     IonContent,
     IonHeader,
     IonPage,
     IonTitle,
     IonToolbar,
-    IonButton
+    IonButton,
   },
   data() {
     return {
@@ -70,18 +66,14 @@ export default defineComponent({
     console.log(coordinates);
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
-    }
+  },
 });
-
-
- 
-
 </script>
 
 <style scoped>
 #container {
   text-align: center;
-  
+
   position: absolute;
   left: 0;
   right: 0;
@@ -97,9 +89,9 @@ export default defineComponent({
 #container p {
   font-size: 16px;
   line-height: 22px;
-  
+
   color: #8c8c8c;
-  
+
   margin: 0;
 }
 

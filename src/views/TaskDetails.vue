@@ -11,17 +11,17 @@
     <ion-content>
       <ion-item>
         <ion-label position="floating">Titel</ion-label>
-        <ion-input v-model="title"></ion-input>
+        <ion-input v-model="todo.title"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Beschreibung</ion-label>
-        <ion-textarea v-model="beschreibung"></ion-textarea>
+        <ion-textarea v-model="todo.description"></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label>Kategorie</ion-label>
-        <ion-select v-model="category" interface="popover">
+        <ion-select v-model="todo.category" interface="popover">
           <ion-select-option
             :key="cat"
             v-for="cat in categories"
@@ -32,25 +32,24 @@
       </ion-item>
 
       <ion-item>
-        <ion-label >Fälligkeitsdatum </ion-label>
+        <ion-label>Fälligkeitsdatum </ion-label>
         <ion-datetime
-          v-model="datum"
+          v-model="todo.due"
           display-format="D MMM YYYY"
           min="2021"
           max="2030"
           value="2021-07-11"
         ></ion-datetime>
-        <ion-select-option v-bind="datum"></ion-select-option>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Reflexion</ion-label>
-        <ion-textarea v-model="reflexion"></ion-textarea>
+        <ion-textarea v-model="todo.reflexion"></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label>Status</ion-label>
-        <ion-select v-bind:value="status" interface="popover">
+        <ion-select v-bind:value="todo.status" interface="popover">
           <ion-select-option
             :key="sta"
             v-for="sta in statuss"
@@ -59,14 +58,14 @@
           >
         </ion-select>
       </ion-item>
-      <ion-button @click="save" expand="block">Speichern</ion-button>
+      <ion-button expand="block">Speichern</ion-button>
     </ion-content>
     <ion-content>
       <ion-grid>
-      <ion-row>
-<ion-col>Fotogalerie</ion-col>
-</ion-row>
-</ion-grid>
+        <ion-row>
+          <ion-col>Fotogalerie</ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-fab-button @click="takePhoto()">
           <ion-icon :icon="camera"></ion-icon>
@@ -79,8 +78,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
-      <!-- <ion-fab> markup  -->
     </ion-content>
   </ion-page>
 </template>
@@ -94,15 +91,27 @@ import {
   IonBackButton,
   IonContent,
   IonButtons,
+  IonButton,
   IonFab,
   IonFabButton,
   IonIcon,
   IonImg,
-  IonGrid
+  IonGrid,
+  IonTitle,
+  IonSelect,
+  IonDatetime,
+  IonTextarea,
+  IonItem,
+  IonInput,
+  IonLabel,
+  IonRow,
+  IonCol,
+  IonSelectOption
 } from "@ionic/vue";
 import { camera, trash, close } from "ionicons/icons";
 import { useRoute } from "vue-router";
 import { usePhotoGallery, UserPhoto } from "@/composables/usePhotoGallery";
+import { useTodos } from "@/composables/useTodos";
 
 export default defineComponent({
   components: {
@@ -110,19 +119,34 @@ export default defineComponent({
     IonHeader,
     IonToolbar,
     IonBackButton,
+    IonButton,
     IonContent,
     IonButtons,
     IonFab,
     IonFabButton,
     IonIcon,
     IonImg,
-    IonGrid
+    IonGrid,
+    IonTitle,
+    IonSelect,
+  IonDatetime,
+  IonTextarea,
+  IonItem,
+  IonInput,
+  IonLabel,
+  IonRow,
+  IonCol,
+  IonSelectOption
   },
   setup() {
     const route = useRoute();
     const { id } = route.params;
     const { photos, takePhoto } = usePhotoGallery();
-    return { id, takePhoto, camera, trash, close ,photos};
+    const { todo, getTodoById } = useTodos();
+    return { id, takePhoto, camera, trash, close, photos, todo, getTodoById };
+  },
+  mounted() {
+    this.getTodoById(this.id as any);
   },
   data() {
     return {
