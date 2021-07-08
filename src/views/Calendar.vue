@@ -1,32 +1,36 @@
 <template>
   <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Kalender</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
-
       <div id="container">
         <ion-button router-link="/tabs/form">Neue Aufgabe</ion-button>
       </div>
 
-        <h4>Deine Koordinaten</h4>
-       <p>Lat: {{ latitude }}</p>
-        <p>Long: {{ longitude }}</p>
+      <h4>Deine Koordinaten</h4>
+      <p>Lat: {{ latitude }}</p>
+      <p>Long: {{ longitude }}</p>
 
+      <ion-item-group v-bind:key="task" v-for="task in tasks">
+        <ion-item-divider>
+          <ion-label>{{ task.date }}</ion-label>
+        </ion-item-divider>
 
-    <ion-item-group v-bind:key="task" v-for="task in tasks">
-      <ion-item-divider>
-        <ion-label>{{ task.date }}</ion-label>
-      </ion-item-divider>
-
-      <ion-item
-        button
-        v-bind:router-link="'/tabs/calendar/' + todo"
-        v-bind:key="todo"
-        v-for="todo in task.todos"
-      >
-        <ion-label>{{ todo }}</ion-label>
-      </ion-item>
-
-    </ion-item-group>
-       
+        <ion-item
+          button
+          v-bind:router-link="'/tabs/calendar/' + todo"
+          v-bind:key="todo"
+          v-for="todo in task.todos"
+        >
+          <ion-label>{{ todo }}</ion-label>
+        </ion-item>
+      </ion-item-group>
     </ion-content>
   </ion-page>
 </template>
@@ -38,8 +42,7 @@ import {
   IonLabel,
   IonPage,
   IonContent,
-  IonButton
-
+  IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { Geolocation } from "@capacitor/geolocation";
@@ -52,7 +55,7 @@ export default defineComponent({
     IonLabel,
     IonPage,
     IonContent,
-    IonButton
+    IonButton,
   },
   data() {
     return {
@@ -68,15 +71,12 @@ export default defineComponent({
         {
           date: "2021-06-08",
           titel: "Springen",
-          },
-          
+        },
       ],
 
       latitude: 0,
       longitude: 0,
       first: "",
-    
-      
     };
   },
   async mounted() {
@@ -90,9 +90,6 @@ export default defineComponent({
     this.longitude = coordinates.coords.longitude;
   },
 });
-
-
-
 </script>
 
 
