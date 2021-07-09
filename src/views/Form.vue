@@ -11,7 +11,7 @@
         <ion-title>Aufgabenerfassung</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content id="form">
       <!-- Input with value -->
 
       <!-- Input with placeholder -->
@@ -52,24 +52,55 @@
       <ion-button @click="addTodo" expand="block">Speichern</ion-button>
     </ion-content>
   </ion-page>
-
 </template>
 
 <script>
-import { useTodos } from "@/composables/useTodos"
-import { IonLabel, IonInput, IonItem, IonDatetime,IonTextarea,IonPage ,IonContent, IonButton,IonSelect,IonSelectOption,IonHeader,IonToolbar,IonBackButton , IonButtons, IonTitle} from "@ionic/vue";
+import { useTodos } from "@/composables/useTodos";
+import {
+  IonLabel,
+  IonInput,
+  IonItem,
+  IonDatetime,
+  IonTextarea,
+  IonPage,
+  IonContent,
+  IonButton,
+  IonSelect,
+  IonSelectOption,
+  IonHeader,
+  IonToolbar,
+  IonBackButton,
+  IonButtons,
+  IonTitle,
+} from "@ionic/vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: { IonLabel, IonInput, IonItem, IonDatetime,IonTextarea,IonPage,IonContent, IonButton,IonSelect,IonSelectOption,IonHeader,IonToolbar,IonBackButton, IonButtons, IonTitle },
+  components: {
+    IonLabel,
+    IonInput,
+    IonItem,
+    IonDatetime,
+    IonTextarea,
+    IonPage,
+    IonContent,
+    IonButton,
+    IonSelect,
+    IonSelectOption,
+    IonHeader,
+    IonToolbar,
+    IonBackButton,
+    IonButtons,
+    IonTitle,
+  },
   data() {
     return {
-      categories: ["PRIVATE", "BUSINESS", "OTHERS"]
+      categories: ["PRIVATE", "BUSINESS", "OTHERS"],
     };
   },
   setup() {
     const { newTodo, addTodo } = useTodos();
     return { newTodo, addTodo };
-  },
+  }
 });
 </script>
