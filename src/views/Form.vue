@@ -51,11 +51,6 @@
 
       <ion-button @click="addTodo" expand="block">Speichern</ion-button>
     </ion-content>
-    <ion-content id="questions">
-      <p>Hat die Aufgabe etwas mit Dir zutun?</p>
-      <ion-button @click="addTodo">Ja</ion-button>
-      <ion-button @click="addTodo">Nein</ion-button>
-    </ion-content>
   </ion-page>
 </template>
 
@@ -78,7 +73,6 @@ import {
   IonButtons,
   IonTitle,
 } from "@ionic/vue";
-import { useRouter } from 'vue-router';
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -107,19 +101,6 @@ export default defineComponent({
   setup() {
     const { newTodo, addTodo } = useTodos();
     return { newTodo, addTodo };
-  },
-  mounted() {
-    const router = useRouter();
-    if (confirm("Hat die Aufgabe etwas mit Dir zutun?")) {
-      if(confirm("Kannst du diese Aufgabe innerhalb von zwei Minuten erledigen?")){
-        alert("Dann erledige sie sofort!");
-        router.push('/tabs/calendar');
-      } 
-    } else {
-      // Do nothing!
-      alert("Dann musst du diese Aufgabe nicht erfassen!");
-      router.push('/tabs/calendar');
-    }
-  },
+  }
 });
 </script>

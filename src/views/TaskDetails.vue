@@ -110,7 +110,7 @@ import {
 } from "@ionic/vue";
 import { camera, trash, close } from "ionicons/icons";
 import { useRoute } from "vue-router";
-import { usePhotoGallery, UserPhoto } from "@/composables/usePhotoGallery";
+import { usePhotoGallery } from "@/composables/usePhotoGallery";
 import { useTodos } from "@/composables/useTodos";
 
 export default defineComponent({
